@@ -1,0 +1,8 @@
+/Users/geaibin/123/mcboffxoauth/src/main/java/cn/xmrhapsody/mcboffx/auth/commands/RegisterCommand.java
+/Users/geaibin/123/mcboffxoauth/src/main/java/cn/xmrhapsody/mcboffx/auth/listeners/PlayerListener.java
+/Users/geaibin/123/mcboffxoauth/src/main/java/cn/xmrhapsody/mcboffx/auth/utils/AuthManager.java
+/Users/geaibin/123/mcboffxoauth/src/main/java/cn/xmrhapsody/mcboffx/auth/storage/MySQLStorageProvider.java
+/Users/geaibin/123/mcboffxoauth/src/main/java/cn/xmrhapsody/mcboffx/auth/storage/FileStorageProvider.java
+/Users/geaibin/123/mcboffxoauth/src/main/java/cn/xmrhapsody/mcboffx/auth/commands/LoginCommand.java
+/Users/geaibin/123/mcboffxoauth/src/main/java/cn/xmrhapsody/mcboffx/auth/storage/StorageProvider.java
+/Users/geaibin/123/mcboffxoauth/src/main/java/cn/xmrhapsody/mcboffx/auth/McboffxAuth.java

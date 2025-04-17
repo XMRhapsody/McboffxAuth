@@ -1,0 +1,16 @@
+name: McboffxAuth
+version: '${project.version}'
+main: cn.xmrhapsody.mcboffx.auth.McboffxAuth
+api-version: 1.8.8
+authors: [XMRHapsody]
+description: Mcboffx Team Auth Plugin -Power by XMRhapsody
+
+commands:
+  login:
+    description: 使用此命令登录
+    usage: /login <密码>
+    aliases: [l]
+  register:
+    description: 使用此命令注册
+    usage: /register <密码> <确认密码>
+    aliases: [reg] 

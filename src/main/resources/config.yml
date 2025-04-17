@@ -1,0 +1,18 @@
+# 存储设置
+storage:
+  # 存储类型: mysql 或 file
+  type: "mysql"
+
+# 数据库配置 (当 storage.type 为 "mysql" 时使用)
+mysql:
+  host: "localhost"
+  port: 3306
+  database: "minecraft"
+  username: "root"
+  password: ""
+
+# 插件设置
+settings:
+  login-timeout: 60 # 登录超时时间（秒）
+  min-password-length: 6 # 最小密码长度
+  allow-unregistered-join: true # 是否允许未注册玩家加入服务器 
