@@ -4,6 +4,7 @@ import cn.xmrhapsody.mcboffx.auth.McboffxAuth;
 import cn.xmrhapsody.mcboffx.auth.utils.AuthManager;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -15,6 +16,8 @@ import org.bukkit.event.entity.EntityTargetEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.event.player.*;
 import org.bukkit.scheduler.BukkitTask;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.GameMode;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -34,9 +37,42 @@ public class PlayerListener implements Listener {
         Player player = event.getPlayer();
         UUID uuid = player.getUniqueId();
         
-        // 将玩家传送到指定坐标
-        Location spawnLocation = new Location(player.getWorld(), 0, 100, 0);
-        player.teleport(spawnLocation);
+        // 检查玩家是否有权限使用此插件
+        if (!player.hasPermission("mcboffx.admin")) {
+            player.kickPlayer(ChatColor.RED + "[Mcboffx] 你没有权限加入此服务器");
+            return;
+        }
+        
+        // 从配置文件获取登录位置和视角设置
+        FileConfiguration config = plugin.getConfig();
+        boolean useFixedLocation = config.getBoolean("login.use-fixed-location", true);
+        
+        if (useFixedLocation) {
+            String worldName = config.getString("login.location.world", player.getWorld().getName());
+            World world = plugin.getServer().getWorld(worldName);
+            if (world == null) world = player.getWorld();
+            
+            // 读取坐标和视角
+            double x = config.getDouble("login.location.x", 0.0);
+            double y = config.getDouble("login.location.y", 70.0);
+            double z = config.getDouble("login.location.z", 0.0);
+            float yaw = (float) config.getDouble("login.location.yaw", 0.0);
+            float pitch = (float) config.getDouble("login.location.pitch", 0.0);
+            
+            // 传送玩家到指定位置
+            Location loginLocation = new Location(world, x, y, z, yaw, pitch);
+            player.teleport(loginLocation);
+            
+            // 设置玩家视角
+            String viewMode = config.getString("login.view.mode", "FIRST_PERSON");
+            if (viewMode.equalsIgnoreCase("THIRD_PERSON")) {
+                // 在Bukkit API中没有直接设置视角的方法，这里使用数据包或其他方式可以实现
+                // 由于实现复杂，这里只注释说明可以通过发送数据包实现
+            }
+        }
+        
+        // 设置登录超时
+        int loginTimeout = plugin.getConfig().getInt("settings.login-timeout", 60);
         
         // 如果玩家未注册，提示注册
         if (!plugin.getStorageProvider().isRegistered(uuid)) {
@@ -51,7 +87,7 @@ public class PlayerListener implements Listener {
                 player.kickPlayer(ChatColor.RED + "[Mcboffx] 登录超时，请重新连接！");
                 timeoutTasks.remove(uuid);
             }
-        }, 20 * 60); // 60秒超时
+        }, 20 * loginTimeout); // 使用配置的超时时间
         
         timeoutTasks.put(uuid, task);
     }

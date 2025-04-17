@@ -3,9 +3,12 @@ package cn.xmrhapsody.mcboffx.auth.commands;
 import cn.xmrhapsody.mcboffx.auth.McboffxAuth;
 import cn.xmrhapsody.mcboffx.auth.utils.AuthManager;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
 public class LoginCommand implements CommandExecutor {
@@ -24,6 +27,12 @@ public class LoginCommand implements CommandExecutor {
         }
 
         Player player = (Player) sender;
+        
+        // 检查玩家是否有权限使用此插件
+        if (!player.hasPermission("mcboffx.admin")) {
+            player.sendMessage(ChatColor.RED + "[Mcboffx] 你没有权限使用此命令");
+            return true;
+        }
 
         if (AuthManager.isAuthenticated(player.getUniqueId())) {
             player.sendMessage(ChatColor.GREEN + "[Mcboffx] 你已经登录了！");
@@ -47,6 +56,7 @@ public class LoginCommand implements CommandExecutor {
         if (plugin.getStorageProvider().checkPassword(player.getUniqueId(), password)) {
             AuthManager.authenticate(player.getUniqueId());
             plugin.getStorageProvider().updateLastLogin(player);
+            
             player.sendMessage(ChatColor.GREEN + "[Mcboffx] 登录成功！现在你可以自由移动了。");
         } else {
             player.sendMessage(ChatColor.RED + "[Mcboffx] 密码错误，请重试！");

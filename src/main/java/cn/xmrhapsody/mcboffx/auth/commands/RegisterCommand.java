@@ -24,6 +24,12 @@ public class RegisterCommand implements CommandExecutor {
         }
 
         Player player = (Player) sender;
+        
+        // 检查玩家是否有权限使用此插件
+        if (!player.hasPermission("mcboffx.admin")) {
+            player.sendMessage(ChatColor.RED + "[Mcboffx] 你没有权限使用此命令");
+            return true;
+        }
 
         if (AuthManager.isAuthenticated(player.getUniqueId())) {
             player.sendMessage(ChatColor.GREEN + "[Mcboffx] 你已经登录了！");
@@ -44,8 +50,9 @@ public class RegisterCommand implements CommandExecutor {
         String confirmPassword = args[1];
 
         // 检查密码长度
-        if (password.length() < 6) {
-            player.sendMessage(ChatColor.RED + "[Mcboffx] 密码长度必须至少为6个字符！");
+        int minPasswordLength = plugin.getConfig().getInt("settings.min-password-length", 6);
+        if (password.length() < minPasswordLength) {
+            player.sendMessage(ChatColor.RED + "[Mcboffx] 密码长度必须至少为" + minPasswordLength + "个字符！");
             return true;
         }
 

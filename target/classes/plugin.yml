@@ -13,4 +13,8 @@ commands:
   register:
     description: 使用此命令注册
     usage: /register <密码> <确认密码>
-    aliases: [reg] 
+    aliases: [reg]
+  setloginspawn:
+    description: 设置玩家登录位置为当前位置
+    usage: /setloginspawn
+    permission: mcboffx.admin 

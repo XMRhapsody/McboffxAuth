@@ -2,6 +2,7 @@ package cn.xmrhapsody.mcboffx.auth;
 
 import cn.xmrhapsody.mcboffx.auth.commands.LoginCommand;
 import cn.xmrhapsody.mcboffx.auth.commands.RegisterCommand;
+import cn.xmrhapsody.mcboffx.auth.commands.SetLoginSpawnCommand;
 import cn.xmrhapsody.mcboffx.auth.listeners.PlayerListener;
 import cn.xmrhapsody.mcboffx.auth.storage.FileStorageProvider;
 import cn.xmrhapsody.mcboffx.auth.storage.MySQLStorageProvider;
@@ -76,6 +77,7 @@ public class McboffxAuth extends JavaPlugin {
     private void registerCommands() {
         getCommand("login").setExecutor(new LoginCommand(this));
         getCommand("register").setExecutor(new RegisterCommand(this));
+        getCommand("setloginspawn").setExecutor(new SetLoginSpawnCommand(this));
     }
     
     private void registerListeners() {

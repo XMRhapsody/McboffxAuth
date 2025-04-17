@@ -3,6 +3,7 @@ cn/xmrhapsody/mcboffx/auth/McboffxAuth.class
 cn/xmrhapsody/mcboffx/auth/listeners/PlayerListener.class
 cn/xmrhapsody/mcboffx/auth/storage/MySQLStorageProvider.class
 cn/xmrhapsody/mcboffx/auth/storage/StorageProvider.class
+cn/xmrhapsody/mcboffx/auth/commands/SetLoginSpawnCommand.class
 cn/xmrhapsody/mcboffx/auth/storage/FileStorageProvider.class
 cn/xmrhapsody/mcboffx/auth/commands/RegisterCommand.class
 cn/xmrhapsody/mcboffx/auth/commands/LoginCommand.class

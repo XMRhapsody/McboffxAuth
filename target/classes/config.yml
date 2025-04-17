@@ -16,3 +16,20 @@ settings:
   login-timeout: 60 # 登录超时时间（秒）
   min-password-length: 6 # 最小密码长度
   allow-unregistered-join: true # 是否允许未注册玩家加入服务器 
+
+# 登录位置和视角设置
+login:
+  # 是否使用固定登录位置
+  use-fixed-location: true
+  # 固定登录位置坐标
+  location:
+    world: "world"
+    x: 0.0
+    y: 70.0
+    z: 0.0
+    yaw: 0.0
+    pitch: 0.0
+  # 视角设置
+  view:
+    # 默认视角模式: FIRST_PERSON 或 THIRD_PERSON
+    mode: "FIRST_PERSON" 
